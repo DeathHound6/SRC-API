@@ -1,5 +1,7 @@
 const axios = require("axios").default;
 
+const RunManager = require("./Runs/RunManager");
+
 module.exports = class SpeedrunAPIClient {
     /**
      * @param {string} apiKey Your API Key. Obtained from https://www.speedrun.com/user/{Username}/settings/apikey
@@ -7,6 +9,8 @@ module.exports = class SpeedrunAPIClient {
     constructor(apiKey) {
         this.apiKey = apiKey;
         this.apiVersion = "v1";
+
+        this.RunManager = new RunManager();
     }
 
     /**
@@ -15,10 +19,9 @@ module.exports = class SpeedrunAPIClient {
      * @param {string} options.endpoint
      * @param {"get"|"post"|"delete"|"put"|"patch"} options.method
      * @param {object} options.data
-     * @param {Function?} callback 
-     * @returns {Promise|null}
+     * @returns {Promise}
      */
-    _request({ endpoint, method, data }, callback) {
+    async _request({ endpoint, method, data }) {
         const url = `https://speedrun.com/api/${this.apiVersion}/${endpoint}`;
         const config = { headers: { "X-API-Key": this.apiKey, Accept: "application/json" }};
         let res = new Promise();
@@ -32,10 +35,6 @@ module.exports = class SpeedrunAPIClient {
             res = axios.post(url, data, config);
         else if (method == "put")
             res = axios.put(url, data, config);
-
-        if (callback)
-            res.then(callback);
-        else
-            return res;
+        return await res;
     }
 }
