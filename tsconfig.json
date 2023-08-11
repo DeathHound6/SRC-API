@@ -1,0 +1,10 @@
+{
+    "include": ["src/**/*.ts"],
+    "compileOnSave": true,
+    "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "dist",
+        "strict": true,
+        "lib": ["ESNext"]
+    }
+}
