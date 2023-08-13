@@ -17,7 +17,8 @@ import { IPlayer, IRun, IRunPlace, Run, RunStatus, RunTime } from "./Runs/Run";
 import { IGetRunsQuery, IPostRunData, IRunVariable, RunManager, RunVariableType } from "./Runs/RunManager";
 import { ISeries } from "./Series/Series";
 import { IUser } from "./Users/User";
-import { IVariable, IVariableValue } from "./Variables/Variable";
+import { IVariable, IVariableValue, Variable } from "./Variables/Variable";
+import { VariableManager } from "./Variables/VariableManager";
 
 export {
     /**
@@ -29,6 +30,8 @@ export {
     Leaderboard,
     Run,
     RunManager,
+    Variable,
+    VariableManager,
 
     /**
      * Interfaces
