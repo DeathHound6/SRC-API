@@ -1,7 +1,7 @@
 import { SpeedrunAPIClient } from "../Client";
-import { Run, RunData, RunStatus } from "./Run";
-import { HTTPMethod } from "../../util/HTTP";
-import { Direction } from "readline";
+import { IRun, RunStatus, Run } from "./Run";
+import { HTTPMethod } from "../util/HTTP";
+import { Direction, Orderby } from "../util/API";
 
 export class RunManager {
     private client;
@@ -12,14 +12,14 @@ export class RunManager {
 
     async GetRuns(params: GetRunsQuery): Promise<Run[]> {
         if (!params.orderby)
-            params.orderby = "game";
+            params.orderby = Orderby.GAME;
         if (!params.direction)
-            params.direction = "desc";
+            params.direction = Direction.DESC;
         const query = new URLSearchParams();
         for (const [key, value] of Object.entries(params))
             query.append(key, String(value));
         const res = this.client._request(`runs?${query.toString()}`, HTTPMethod.GET, {});
-        return (await res).data.data.map((e: RunData) => new Run(e));
+        return (await res).data.data.map((e: IRun) => new Run(e));
     }
 
     async GetRunById(id: String): Promise<Run> {
@@ -38,18 +38,18 @@ export class RunManager {
 }
 
 export interface GetRunsQuery {
-    orderby: "game"|"category"|"level"|"platform"|"region"|"emulated"|"date"|"submitted"|"status"|"verify-date",
+    orderby: Orderby,
     direction: Direction,
     status: RunStatus|null,
-    emulated: Boolean|null,
-    region: String|null,
-    platform: String| null,
-    category: String| null,
-    level: String|null,
-    game: String|null,
-    examiner: String|null,
-    guest: String|null,
-    user: String|null
+    emulated: boolean|null,
+    region: string|null,
+    platform: string|null,
+    category: string|null,
+    level: string|null,
+    game: string|null,
+    examiner: string|null,
+    guest: string|null,
+    user: string|null
 }
 
 export interface PostRunData {
