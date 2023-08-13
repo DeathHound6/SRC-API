@@ -1,6 +1,6 @@
 export interface Asset {
     uri: string;
-    widht: number;
+    width: number;
     height: number;
 }
 
