@@ -10,18 +10,24 @@ export class RunManager {
         this.client = client;
     }
 
-    async GetRuns(params: IGetRunsQuery): Promise<Run[]> {
-        if (!params.orderby)
-            params.orderby = Orderby.GAME;
-        if (!params.direction)
-            params.direction = Direction.DESC;
+    /**
+     * Get all runs
+     */
+    async GetRuns(params?: IGetRunsQuery): Promise<Run[]> {
+        if (!params)
+            params = {'direction': Direction.DESC, 'orderby': Orderby.GAME} as IGetRunsQuery
+
         const query = new URLSearchParams();
         for (const [key, value] of Object.entries(params))
             query.append(key, String(value));
+
         const res = this.client._request(`runs?${query.toString()}`, HTTPMethod.GET, {});
         return (await res).data.data.map((e: IRun) => new Run(e));
     }
 
+    /**
+     * Get a single run by it's ID
+     */
     async GetRunById(id: String): Promise<Run> {
         const res = this.client._request(`runs/${id}`, HTTPMethod.GET, {});
         return new Run((await res).data.data);
