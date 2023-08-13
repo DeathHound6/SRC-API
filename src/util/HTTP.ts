@@ -29,3 +29,10 @@ export async function _request(apiVersion: APIVersion, apiKey: string, endpoint:
         res = axios.put(url, data, config);
     return await res;
 }
+
+export async function _formatQueryParameters(params: object): Promise<URLSearchParams> {
+    const query = new URLSearchParams();
+    for (const [key, value] of Object.entries(params))
+        query.append(key, String(value));
+    return query;
+}
