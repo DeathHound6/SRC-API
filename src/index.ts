@@ -6,7 +6,8 @@ import { IEngine } from "./Engines/Engine";
 import { IBulkGame, IGame } from "./Games/Game";
 import { IGameType } from "./Games/Types/GameType";
 import { IGenre } from "./Genres/Genre";
-import { IGuest } from "./Guests/Guest";
+import { Guest, IGuest } from "./Guests/Guest";
+import { GuestManager } from "./Guests/GuestManager";
 import { Leaderboard, ILeaderboard } from "./Leaderboards/Leaderboard";
 import { ILevel } from "./Levels/Level";
 import { INotification } from "./Notifications/Notification";
@@ -27,6 +28,8 @@ export {
     Category,
     CategoryManager,
     Client,
+    Guest,
+    GuestManager,
     Leaderboard,
     Run,
     RunManager,
