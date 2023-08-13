@@ -17,7 +17,7 @@ import { IPlayer, IRun, IRunPlace, Run, RunStatus, RunTime } from "./Runs/Run";
 import { IGetRunsQuery, IPostRunData, IRunVariable, RunManager, RunVariableType } from "./Runs/RunManager";
 import { ISeries } from "./Series/Series";
 import { IUser } from "./Users/User";
-import { IVariable } from "./Variables/Variable";
+import { IVariable, IVariableValue } from "./Variables/Variable";
 
 export {
     /**
@@ -54,6 +54,7 @@ export {
     ISeries,
     IUser,
     IVariable,
+    IVariableValue,
 
     /**
      * Enums

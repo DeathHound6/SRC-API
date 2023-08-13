@@ -13,7 +13,7 @@ export interface IVariable {
     'obsoletes': boolean;
     values: {
         values: {
-            [key: string]: VariableValue;
+            [key: string]: IVariableValue;
         };
         default: string|null;
     };
@@ -21,7 +21,7 @@ export interface IVariable {
     links: Link[];
 }
 
-export interface VariableValue {
+export interface IVariableValue {
     label: string;
     rules: string;
     flags: {
