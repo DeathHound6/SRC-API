@@ -1,6 +1,6 @@
 import { Link } from "../util/API";
 
-export interface Notification {
+export interface INotification {
     id: string;
     created: string;
     status: 'read'|'unread';

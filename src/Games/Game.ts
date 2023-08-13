@@ -1,7 +1,7 @@
 import { RunTime } from "../Runs/Run";
 import { Asset, Link } from "../util/API";
 
-export interface Game {
+export interface IGame {
     id: string;
     names: {
         international: string;
@@ -52,7 +52,7 @@ export interface Game {
 /**
  * Represents a game when they have been fetched in bulk
  */
-export interface BulkGame {
+export interface IBulkGame {
     id: string;
     names: {
         international: string;

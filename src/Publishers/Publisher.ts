@@ -1,6 +1,6 @@
 import { Link } from "../util/API";
 
-export interface Publisher {
+export interface IPublisher {
     id: string;
     name: string;
     links: Link[];

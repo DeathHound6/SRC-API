@@ -1,6 +1,6 @@
 import { Link, Asset } from "../util/API";
 
-export interface Series {
+export interface ISeries {
     id: string;
     name: {
         international: string;

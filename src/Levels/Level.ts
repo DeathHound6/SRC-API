@@ -1,6 +1,6 @@
 import { Link } from "../util/API";
 
-export interface Level {
+export interface ILevel {
     id: string;
     name: string;
     weblink: string;

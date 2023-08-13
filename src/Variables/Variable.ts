@@ -1,6 +1,6 @@
 import { Link } from "../util/API";
 
-export interface Variable {
+export interface IVariable {
     id: string;
     name: string;
     category: string|null;

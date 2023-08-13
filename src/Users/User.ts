@@ -1,6 +1,6 @@
 import { Link } from "../util/API";
 
-export interface User {
+export interface IUser {
     id: string;
     name: {
         international: string;

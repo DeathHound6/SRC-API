@@ -1,6 +1,6 @@
 import { Link } from "../util/API";
 
-export interface Guest {
+export interface IGuest {
     name: string;
     links: Link[];
 }

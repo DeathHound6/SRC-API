@@ -1,6 +1,6 @@
 import { Link } from "../../util/API";
 
-export interface GameType {
+export interface IGameType {
     id: string;
     name: string;
     links: Link[];
