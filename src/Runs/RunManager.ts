@@ -1,16 +1,16 @@
 import { SpeedrunAPIClient } from "../Client";
-import { IRun, RunStatus, Run } from "./Run";
+import { IRun, RunStatus, Run, IPlayer } from "./Run";
 import { HTTPMethod } from "../util/HTTP";
 import { Direction, Orderby } from "../util/API";
 
 export class RunManager {
-    private client;
+    private client: SpeedrunAPIClient;
 
     constructor(client: SpeedrunAPIClient) {
         this.client = client;
     }
 
-    async GetRuns(params: GetRunsQuery): Promise<Run[]> {
+    async GetRuns(params: IGetRunsQuery): Promise<Run[]> {
         if (!params.orderby)
             params.orderby = Orderby.GAME;
         if (!params.direction)
@@ -32,12 +32,14 @@ export class RunManager {
      * 
      * This endpoint requires Authorization
      */
-    async PostRun(run: PostRunData): Promise<Run> {
-
+    async PostRun(run: IPostRunData): Promise<Run> {
+        const res = this.client._request("runs", HTTPMethod.POST, {'run': run});
+        // TODO: Add error handling
+        return new Run((await res).data.data);
     }
 }
 
-export interface GetRunsQuery {
+export interface IGetRunsQuery {
     orderby: Orderby,
     direction: Direction,
     status: RunStatus|null,
@@ -52,6 +54,34 @@ export interface GetRunsQuery {
     user: string|null
 }
 
-export interface PostRunData {
+export interface IPostRunData {
+    category: string;
+    level?: string;
+    date?: string;
+    region?: string;
+    platform?: string;
+    verified?: boolean;
+    times: {
+        realtime?: number,
+        'realtime_noloads'?: number,
+        ingame?: number
+    };
+    players?: IPlayer[];
+    emulated: boolean;
+    video: string;
+    comment?: string;
+    splitsio?: string;
+    variables: {
+        [id: string]: IRunVariable
+    }
+}
 
+export interface IRunVariable {
+    type: RunVariableType,
+    value: string;
+}
+
+export enum RunVariableType {
+    PREDEFINED = 'pre-defined',
+    USERDEFINED = 'user-defined'
 }
