@@ -13,7 +13,7 @@ export class GuestManager {
      * Get a single guest runner by their username
      */
     async GetGuestByName(name: string): Promise<Guest> {
-        const res = this.client._request(`guests/${name}`, HTTPMethod.GET, {});
+        const res = await this.client._request(`guests/${name}`, HTTPMethod.GET, {});
         return new Guest((await res).data.data);
     }
 }

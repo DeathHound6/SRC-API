@@ -13,7 +13,7 @@ export class VariableManager {
      * Get a single variable by its ID
      */
     async GetVariableById(id: string): Promise<Variable> {
-        const res = this.client._request(`variables/${id}`, HTTPMethod.GET, {});
+        const res = await this.client._request(`variables/${id}`, HTTPMethod.GET, {});
         return new Variable((await res).data.data);
     }
 }

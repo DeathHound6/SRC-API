@@ -1,6 +1,6 @@
 import { SpeedrunAPIClient } from "../Client";
 import { IRun, RunStatus, Run, IPlayer } from "./Run";
-import { HTTPMethod } from "../util/HTTP";
+import { HTTPMethod, _formatQueryParameters } from "../util/HTTP";
 import { Direction, Orderby } from "../util/API";
 
 export class RunManager {
@@ -16,12 +16,8 @@ export class RunManager {
     async GetRuns(params?: IGetRunsQuery): Promise<Run[]> {
         if (!params)
             params = {'direction': Direction.DESC, 'orderby': Orderby.GAME} as IGetRunsQuery
-
-        const query = new URLSearchParams();
-        for (const [key, value] of Object.entries(params))
-            query.append(key, String(value));
-
-        const res = this.client._request(`runs?${query.toString()}`, HTTPMethod.GET, {});
+        const query = await _formatQueryParameters(params);
+        const res = await this.client._request(`runs?${query.toString()}`, HTTPMethod.GET, {});
         return (await res).data.data.map((e: IRun) => new Run(e));
     }
 
@@ -29,7 +25,7 @@ export class RunManager {
      * Get a single run by it's ID
      */
     async GetRunById(id: String): Promise<Run> {
-        const res = this.client._request(`runs/${id}`, HTTPMethod.GET, {});
+        const res = await this.client._request(`runs/${id}`, HTTPMethod.GET, {});
         return new Run((await res).data.data);
     }
 
