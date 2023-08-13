@@ -28,6 +28,8 @@ export {
     Category,
     CategoryManager,
     Client,
+    Genre,
+    GenreManager,
     Guest,
     GuestManager,
     Leaderboard,
@@ -74,6 +76,7 @@ export {
     /**
      * Manager Options
      */
+    IGetGenresQuery,
     IGetRunsQuery,
     IPostRunData,
 };
